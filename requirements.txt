@@ -1,0 +1,4 @@
+duckdb>=1.5
+pyarrow>=20
+matplotlib>=3.8
+dedupkit-br @ git+https://github.com/CaiqueDourado/DedupKit@v0.2.0#subdirectory=python

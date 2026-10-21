@@ -1,0 +1,24 @@
+{
+ "pairs": 2062205,
+ "by_type": {
+  "refused_2019": 179572,
+  "same_code": 200000,
+  "same_code_attribute_conflict": 116752,
+  "same_code_no_shared_word": 81179,
+  "same_group_attribute_conflict": 200000,
+  "same_group_model_conflict": 200000,
+  "same_group_name_rule": 200000,
+  "same_image": 200000,
+  "same_image_attribute_conflict": 200000,
+  "same_image_model_conflict": 84702,
+  "similar_name_attribute_conflict": 200000,
+  "similar_name_model_conflict": 200000
+ },
+ "candidates": 12897193,
+ "sample_percent": 10,
+ "max_block": 30,
+ "max_per_type": 200000,
+ "dedupkit": "0.2.0",
+ "seconds": 1358,
+ "duckdb": "2.0.0"
+}

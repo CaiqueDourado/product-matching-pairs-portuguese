@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+type: dataset
+title: "Pares de produtos para matching (pt-BR): labelled pairs of Brazilian product offers with hard negatives and 780 hand-labelled pairs"
+authors:
+  - family-names: Dourado
+    given-names: Caique
+version: 1.0.0
+date-released: 2026-10-21
+license: CC-BY-4.0
+repository-code: "https://github.com/CaiqueDourado/pares-matching-produtos-ptbr"
+url: "https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr"
+keywords:
+  - product-matching
+  - entity-resolution
+  - record-linkage
+  - hard-negatives
+  - brazil
+  - portuguese
+  - e-commerce

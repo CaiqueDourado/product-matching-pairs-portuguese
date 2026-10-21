@@ -1,0 +1,221 @@
+{
+  "title": "Pares de Produtos para Matching (pt-BR)",
+  "subtitle": "2.1M labelled pairs of Brazilian product offers, hard negatives, 780 checked",
+  "description": "**2,062,205 labelled pairs of product offers from Brazilian online stores**, for training and testing product matching (entity resolution) in Portuguese. Most of them are **hard negatives**: two offers that share a barcode, a photo or almost the whole name, and are still different products (another size, voltage, colour, pack or model). **780 pairs were checked one by one**, so methods can be scored against a reference that does not come from the rules that built the rest.\n\nCode, documentation and a sample: https://github.com/CaiqueDourado/pares-matching-produtos-ptbr\n\n| Same barcode, same product | Same barcode, different product |\n|---|---|\n| Pilha de Zinco AAA Rayovac 4un. | Ferro a Vapor T-fal Fv1420 Rosa - 127v |\n| Pilha Rayovac Amarelinha Palito com 4 | Ferro a Vapor T-Fal FV1420 Rosa - 220V |\n\n## Pair types\n\n| Pair type | Label | How it was made | Pairs | Label right in the checked pairs |\n|---|:---:|---|---:|---:|\n| `same_code` | 1 | same barcode, names share a word, no attribute or model conflict | 200,000 | 95% of 60 |\n| `same_code_attribute_conflict` | 0 | same barcode, different size, voltage, colour, pack... | 116,752 | 74% of 43 |\n| `same_code_no_shared_word` | 0 | same barcode, names share no word (a store reused the code) | 81,179 | 98% of 60 |\n| `same_group_name_rule` | 1 | same 2019 product group (joined by a name or URL rule), no conflict | 200,000 | 66% of 44 |\n| `same_group_attribute_conflict` | 0 | same 2019 group, different attributes | 200,000 | 99% of 76 |\n| `same_group_model_conflict` | 0 | same 2019 group, different model numbers (TB125 vs TB112) | 200,000 | 89% of 47 |\n| `same_image` | 1 | same image file, no conflict | 200,000 | 83% of 30 |\n| `same_image_attribute_conflict` | 0 | same image file, different attributes (sizes of one shoe) | 200,000 | 99% of 96 |\n| `same_image_model_conflict` | 0 | same image file, different model numbers | 84,702 | 95% of 44 |\n| `similar_name_attribute_conflict` | 0 | same name without numbers and units, different measures | 200,000 | 100% of 67 |\n| `similar_name_model_conflict` | 0 | same name without numbers, different model numbers or years | 200,000 | 97% of 39 |\n| `refused_2019` | 0 | barcode match refused by the 2019 routine (names share no word) | 179,572 | 97% of 59 |\n\n\"Same product\" means the same SKU: the same model in the same size, colour, voltage and pack. Labels in `pairs.parquet` are silver (from rules); the last column shows how often each rule was right on the checked pairs. Score models on `gold_pairs.csv`.\n\n![Methods on the checked pairs](https://raw.githubusercontent.com/CaiqueDourado/pares-matching-produtos-ptbr/main/docs/img/gold-methods.png)\n\n## Files\n\n- `pairs.parquet`: every pair, with names, brands, stores, prices, image signatures, 2019 groups, `split` (train/valid/test by cluster: a barcode, group or image never crosses splits) and `name_similarity`.\n- `gold_pairs.csv`: the 780 pairs checked one by one (label 1, 0 or empty when the names do not say enough).\n- `build_stats.json`: counts and build parameters.\n\n## Quick start\n\n```python\nimport duckdb\nduckdb.sql(\"\"\"\n    SELECT split, pair_type, label, count(*) AS pairs\n    FROM '/kaggle/input/pares-matching-produtos-ptbr/pairs.parquet'\n    GROUP BY ALL ORDER BY split, pair_type\n\"\"\")\n```\n\n## Source\n\nOffers from the Brazilian e-commerce product catalog (114.6 million offers, 2019-2024): https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil. Pairs typed with DedupKit 0.2.0 (https://github.com/CaiqueDourado/DedupKit) plus a model-number check. Methodology: https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/blob/main/docs/methodology.md\n\n## License\n\nCC BY 4.0. Product names, brands and prices are factual information from stores and public affiliate feeds. No images are distributed.\n",
+  "id": "caiquedourado/pares-matching-produtos-ptbr",
+  "licenses": [
+    {
+      "name": "Attribution 4.0 International (CC BY 4.0)"
+    }
+  ],
+  "keywords": [
+    "brazil",
+    "nlp",
+    "tabular",
+    "retail and shopping",
+    "e-commerce services"
+  ],
+  "isPrivate": false,
+  "resources": [
+    {
+      "path": "pairs.parquet",
+      "description": "Every pair of offers with type, silver label, split and context columns.",
+      "schema": {
+        "fields": [
+          {
+            "name": "pair_id",
+            "description": "Pair id",
+            "type": "integer"
+          },
+          {
+            "name": "split",
+            "description": "train, valid or test, by cluster",
+            "type": "string"
+          },
+          {
+            "name": "pair_type",
+            "description": "How the pair was found and what the checks said",
+            "type": "string"
+          },
+          {
+            "name": "label",
+            "description": "1 same product (same SKU), 0 different. Silver label from rules",
+            "type": "integer"
+          },
+          {
+            "name": "reason",
+            "description": "Why the pair is 0: attribute, model numbers or no shared word",
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "description": "Blocking value: barcode, 2019 group, image signature or name without numbers",
+            "type": "string"
+          },
+          {
+            "name": "cluster",
+            "description": "Source and key. The same cluster is always in the same split",
+            "type": "string"
+          },
+          {
+            "name": "offer_a",
+            "description": "Offer id in the catalog",
+            "type": "integer"
+          },
+          {
+            "name": "offer_b",
+            "description": "Offer id in the catalog",
+            "type": "integer"
+          },
+          {
+            "name": "name_a",
+            "description": "Product name as the store wrote it",
+            "type": "string"
+          },
+          {
+            "name": "name_b",
+            "description": "Product name as the store wrote it",
+            "type": "string"
+          },
+          {
+            "name": "brand_a",
+            "description": "Brand from the store or feed",
+            "type": "string"
+          },
+          {
+            "name": "brand_b",
+            "description": "Brand from the store or feed",
+            "type": "string"
+          },
+          {
+            "name": "store_a",
+            "description": "Store id in the catalog",
+            "type": "integer"
+          },
+          {
+            "name": "store_b",
+            "description": "Store id in the catalog",
+            "type": "integer"
+          },
+          {
+            "name": "price_a",
+            "description": "Price in BRL",
+            "type": "number"
+          },
+          {
+            "name": "price_b",
+            "description": "Price in BRL",
+            "type": "number"
+          },
+          {
+            "name": "image_hash_a",
+            "description": "Image signature of the catalog",
+            "type": "string"
+          },
+          {
+            "name": "image_hash_b",
+            "description": "Image signature of the catalog",
+            "type": "string"
+          },
+          {
+            "name": "group_a",
+            "description": "2019 product group",
+            "type": "integer"
+          },
+          {
+            "name": "group_b",
+            "description": "2019 product group",
+            "type": "integer"
+          },
+          {
+            "name": "group_rule_a",
+            "description": "Rule that put the offer in its 2019 group",
+            "type": "string"
+          },
+          {
+            "name": "group_rule_b",
+            "description": "Rule that put the offer in its 2019 group",
+            "type": "string"
+          },
+          {
+            "name": "name_similarity",
+            "description": "Jaccard similarity of the names' word sets, 0 to 1",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "path": "gold_pairs.csv",
+      "description": "780 pairs checked one by one, with the label the rules give and the checked label.",
+      "schema": {
+        "fields": [
+          {
+            "name": "gold_id",
+            "description": "Row number",
+            "type": "integer"
+          },
+          {
+            "name": "source",
+            "description": "How the candidate was found",
+            "type": "string"
+          },
+          {
+            "name": "pair_type",
+            "description": "Type the build rules give the pair; empty when left out",
+            "type": "string"
+          },
+          {
+            "name": "silver_label",
+            "description": "Label the build rules give",
+            "type": "integer"
+          },
+          {
+            "name": "reason",
+            "description": "As in pairs.parquet",
+            "type": "string"
+          },
+          {
+            "name": "label",
+            "description": "Label checked one by one: 1 same SKU, 0 different, empty when unsure",
+            "type": "integer"
+          },
+          {
+            "name": "name_a",
+            "description": "Product name",
+            "type": "string"
+          },
+          {
+            "name": "name_b",
+            "description": "Product name",
+            "type": "string"
+          },
+          {
+            "name": "brand_a",
+            "description": "Brand",
+            "type": "string"
+          },
+          {
+            "name": "brand_b",
+            "description": "Brand",
+            "type": "string"
+          },
+          {
+            "name": "price_a",
+            "description": "Price in BRL",
+            "type": "number"
+          },
+          {
+            "name": "price_b",
+            "description": "Price in BRL",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "path": "build_stats.json",
+      "description": "Pairs per type and build parameters."
+    }
+  ]
+}
