@@ -1,6 +1,6 @@
 # Pares de produtos para matching (pt-BR)
 
-[![validate](https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/actions/workflows/validate.yml/badge.svg)](https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/actions/workflows/validate.yml)
+[![validate](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml/badge.svg)](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml)
 [![Dados: CC BY 4.0](https://img.shields.io/badge/dados-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA.md)
 [![Código: MIT](https://img.shields.io/badge/c%C3%B3digo-MIT-blue.svg)](LICENSE)
 [![Kaggle](https://img.shields.io/badge/Kaggle-dataset%20completo-20BEFF.svg)](https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr)
@@ -22,7 +22,7 @@ que os métodos sejam avaliados contra uma referência que não vem das regras q
 | Sapatilha com Fivela Usaflex - **35** - COCO | Shampoo Aussie Moist **865ML** |
 | Sapatilha com Fivela Usaflex Coco - **34** - Coco | Shampoo Aussie Moist **180 Ml** |
 
-As ofertas vêm do [catálogo de produtos do e-commerce brasileiro](https://github.com/CaiqueDourado/catalogo-produtos-ecommerce-brasil)
+As ofertas vêm do [catálogo de produtos do e-commerce brasileiro](https://github.com/CaiqueDourado/brazilian-ecommerce-products)
 (114,6 milhões de ofertas, 2019–2024). Este repositório tem o script de montagem, a documentação, os 780 pares rotulados um a um e
 uma amostra de {SAMPLE_PT} pares. **O dataset completo está no [Kaggle](https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr).**
 
@@ -44,29 +44,6 @@ mesmo calçado são produtos diferentes aqui, porque têm códigos de barras dif
 Os rótulos de `pairs.parquet` são **aproximados (silver)**: vêm de regras. A última coluna diz quantas vezes cada regra acertou
 nos pares rotulados um a um. Use os tipos com acerto alto para treinar como estão, pondere os outros e
 **avalie os modelos nos pares rotulados um a um**.
-
-## Como foi feito
-
-```mermaid
-flowchart LR
-  C[("Catálogo<br/>114,6 mi de ofertas")] --> K1["Mesmo código de barras<br/>5.986.116"]
-  C --> K2["Mesmo grupo de 2019<br/>14.584.554"]
-  C --> K3["Mesma assinatura de imagem<br/>9.549.208"]
-  C --> K4["Mesmo nome sem<br/>números e unidades<br/>8.396.126"]
-  K1 --> D["Lojas diferentes,<br/>nomes diferentes<br/>12.897.193 candidatos"]
-  K2 --> D
-  K3 --> D
-  K4 --> D
-  R["Recusas registradas em 2019<br/>157.398 pares"] --> T
-  D --> CH{"Checagens<br/>1. palavra em comum<br/>2. atributos, DedupKit<br/>3. números de modelo"}
-  CH --> T["12 tipos de par<br/>rótulo 1 ou 0<br/>até 200.000 cada"]
-  T --> P[("pairs.parquet<br/>2.062.205<br/>split pela chave: 80/10/10")]
-  T -.->|"60 por tipo,<br/>primeiro build"| G["780 pares<br/>rotulados um a um"]
-  G -.->|"erros achados"| DK["DedupKit 0.2.0"]
-  DK -.->|"rebuild"| CH
-```
-
-Cada etapa, com contagens: [metodologia](docs/methodology.md) (em inglês).
 
 ## Os 780 pares rotulados um a um
 
@@ -124,7 +101,7 @@ Como os pares foram montados, passo a passo: [metodologia](docs/methodology.md) 
 
 ## Relacionados
 
-- [catalogo-produtos-ecommerce-brasil](https://github.com/CaiqueDourado/catalogo-produtos-ecommerce-brasil): o catálogo de onde vêm as ofertas ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
+- [brazilian-ecommerce-products](https://github.com/CaiqueDourado/brazilian-ecommerce-products): o catálogo de onde vêm as ofertas ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
 - [DedupKit](https://github.com/CaiqueDourado/DedupKit): as regras de matching usadas para tipar os pares, em Python e .NET. A conferência de atributos da versão 0.2.0 foi escrita a partir dos erros encontrados ao rotular estes pares.
 - [SimilarImageFinder](https://github.com/CaiqueDourado/SimilarImageFinder): hashes perceptuais de imagem, para casar pela foto.
 - [taxonomia-google-produtos-ptbr](https://github.com/CaiqueDourado/taxonomia-google-produtos-ptbr): a taxonomia de produtos do Google em português.

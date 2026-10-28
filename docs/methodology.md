@@ -1,6 +1,6 @@
 # Methodology
 
-How `pairs.parquet` was built from the [catalog](https://github.com/CaiqueDourado/catalogo-produtos-ecommerce-brasil).
+How `pairs.parquet` was built from the [catalog](https://github.com/CaiqueDourado/brazilian-ecommerce-products).
 Script: [`scripts/build_pairs.py`](../scripts/build_pairs.py) (DuckDB + [DedupKit](https://github.com/CaiqueDourado/DedupKit) 0.2.0),
 about 20 minutes on a desktop over the 114.6 million offers.
 

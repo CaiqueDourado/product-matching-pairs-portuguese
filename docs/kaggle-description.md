@@ -1,6 +1,6 @@
 **2,062,205 labelled pairs of product offers from Brazilian online stores**, for training and testing product matching (entity resolution) in Portuguese. Most of them are **hard negatives**: two offers that share a barcode, a photo or almost the whole name, and are still different products (another size, voltage, colour, pack or model). **780 pairs were checked one by one**, so methods can be scored against a reference that does not come from the rules that built the rest.
 
-Code, documentation and a sample: https://github.com/CaiqueDourado/pares-matching-produtos-ptbr
+Code, documentation and a sample: https://github.com/CaiqueDourado/product-matching-pairs-portuguese
 
 | Same barcode, same product | Same barcode, different product |
 |---|---|
@@ -26,11 +26,7 @@ Code, documentation and a sample: https://github.com/CaiqueDourado/pares-matchin
 
 "Same product" means the same SKU: the same model in the same size, colour, voltage and pack. Labels in `pairs.parquet` are silver (from rules); the last column shows how often each rule was right on the checked pairs. Score models on `gold_pairs.csv`.
 
-![Methods on the checked pairs](https://raw.githubusercontent.com/CaiqueDourado/pares-matching-produtos-ptbr/main/docs/img/gold-methods.png)
-
-## How it was built
-
-![How the pairs were built](https://raw.githubusercontent.com/CaiqueDourado/pares-matching-produtos-ptbr/main/docs/img/flow.png)
+![Methods on the checked pairs](https://raw.githubusercontent.com/CaiqueDourado/product-matching-pairs-portuguese/main/docs/img/gold-methods.png)
 
 ## Files
 
@@ -51,7 +47,7 @@ duckdb.sql("""
 
 ## Source
 
-Offers from the Brazilian e-commerce product catalog (114.6 million offers, 2019-2024): https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil. Pairs typed with DedupKit 0.2.0 (https://github.com/CaiqueDourado/DedupKit) plus a model-number check. Methodology: https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/blob/main/docs/methodology.md
+Offers from the Brazilian e-commerce product catalog (114.6 million offers, 2019-2024): https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil. Pairs typed with DedupKit 0.2.0 (https://github.com/CaiqueDourado/DedupKit) plus a model-number check. Methodology: https://github.com/CaiqueDourado/product-matching-pairs-portuguese/blob/main/docs/methodology.md
 
 ## License
 

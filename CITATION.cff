@@ -8,7 +8,7 @@ authors:
 version: 1.0.0
 date-released: 2026-10-21
 license: CC-BY-4.0
-repository-code: "https://github.com/CaiqueDourado/pares-matching-produtos-ptbr"
+repository-code: "https://github.com/CaiqueDourado/product-matching-pairs-portuguese"
 url: "https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr"
 keywords:
   - product-matching

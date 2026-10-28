@@ -1,6 +1,6 @@
 # Product matching pairs (pt-BR)
 
-[![validate](https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/actions/workflows/validate.yml/badge.svg)](https://github.com/CaiqueDourado/pares-matching-produtos-ptbr/actions/workflows/validate.yml)
+[![validate](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml/badge.svg)](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA.md)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![Kaggle](https://img.shields.io/badge/Kaggle-full%20dataset-20BEFF.svg)](https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr)
@@ -22,7 +22,7 @@ scored against a reference that does not come from the rules that built the rest
 | Sapatilha com Fivela Usaflex - **35** - COCO | Shampoo Aussie Moist **865ML** |
 | Sapatilha com Fivela Usaflex Coco - **34** - Coco | Shampoo Aussie Moist **180 Ml** |
 
-The offers come from the [Brazilian e-commerce product catalog](https://github.com/CaiqueDourado/catalogo-produtos-ecommerce-brasil)
+The offers come from the [Brazilian e-commerce product catalog](https://github.com/CaiqueDourado/brazilian-ecommerce-products)
 (114.6 million offers, 2019–2024). This repository has the build script, the documentation, the 780 pairs labelled one by one and a
 sample of {SAMPLE} pairs. **The full dataset is on [Kaggle](https://www.kaggle.com/datasets/caiquedourado/pares-matching-produtos-ptbr).**
 
@@ -44,29 +44,6 @@ shoe are different products here, as they have different barcodes.
 The labels in `pairs.parquet` are **silver**: they come from rules. The last column says how often each rule was right on
 the pairs labelled one by one. Use the types with high agreement for training as they are, weigh the others, and
 **score models on the gold pairs**.
-
-## How it was built
-
-```mermaid
-flowchart LR
-  C[("Catalog<br/>114.6M offers")] --> K1["Same barcode<br/>5,986,116"]
-  C --> K2["Same 2019 group<br/>14,584,554"]
-  C --> K3["Same image signature<br/>9,549,208"]
-  C --> K4["Same name without<br/>numbers and units<br/>8,396,126"]
-  K1 --> D["Different stores,<br/>different names<br/>12,897,193 candidates"]
-  K2 --> D
-  K3 --> D
-  K4 --> D
-  R["2019 refusals log<br/>157,398 pairs"] --> T
-  D --> CH{"Checks<br/>1. shared word<br/>2. attributes, DedupKit<br/>3. model numbers"}
-  CH --> T["12 pair types<br/>label 1 or 0<br/>up to 200,000 each"]
-  T --> P[("pairs.parquet<br/>2,062,205<br/>split by key: 80/10/10")]
-  T -.->|"60 per type,<br/>first build"| G["780 pairs<br/>labelled one by one"]
-  G -.->|"errors found"| DK["DedupKit 0.2.0"]
-  DK -.->|"rebuild"| CH
-```
-
-Each step, with counts: [methodology](docs/methodology.md).
 
 ## The 780 pairs labelled one by one
 
@@ -124,7 +101,7 @@ How the pairs were built, step by step: [methodology](docs/methodology.md).
 
 ## Related
 
-- [catalogo-produtos-ecommerce-brasil](https://github.com/CaiqueDourado/catalogo-produtos-ecommerce-brasil): the catalog these offers come from ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
+- [brazilian-ecommerce-products](https://github.com/CaiqueDourado/brazilian-ecommerce-products): the catalog these offers come from ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
 - [DedupKit](https://github.com/CaiqueDourado/DedupKit): the matching rules used to type the pairs, in Python and .NET. Its 0.2.0 attribute check was written from the errors found while labelling these pairs.
 - [SimilarImageFinder](https://github.com/CaiqueDourado/SimilarImageFinder): perceptual image hashes, for matching by photo.
 - [taxonomia-google-produtos-ptbr](https://github.com/CaiqueDourado/taxonomia-google-produtos-ptbr): Google's product taxonomy in Portuguese.
