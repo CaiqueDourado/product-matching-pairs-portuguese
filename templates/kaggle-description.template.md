@@ -17,6 +17,10 @@ Code, documentation and a sample: https://github.com/CaiqueDourado/product-match
 
 ![Methods on the checked pairs](https://raw.githubusercontent.com/CaiqueDourado/product-matching-pairs-portuguese/main/docs/img/gold-methods.png)
 
+## How it was built
+
+![How the pairs were built](https://raw.githubusercontent.com/CaiqueDourado/product-matching-pairs-portuguese/main/docs/img/flow.png)
+
 ## Files
 
 - `pairs.parquet`: every pair, with names, brands, stores, prices, image signatures, 2019 groups, `split` (train/valid/test by cluster: a barcode, group or image never crosses splits) and `name_similarity`.

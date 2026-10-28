@@ -45,6 +45,29 @@ Os rótulos de `pairs.parquet` são **aproximados (silver)**: vêm de regras. A 
 nos pares rotulados um a um. Use os tipos com acerto alto para treinar como estão, pondere os outros e
 **avalie os modelos nos pares rotulados um a um**.
 
+## Como foi feito
+
+```mermaid
+flowchart LR
+  C[("Catálogo<br/>114,6 mi de ofertas")] --> K1["Mesmo código de barras<br/>5.986.116"]
+  C --> K2["Mesmo grupo de 2019<br/>14.584.554"]
+  C --> K3["Mesma assinatura de imagem<br/>9.549.208"]
+  C --> K4["Mesmo nome sem<br/>números e unidades<br/>8.396.126"]
+  K1 --> D["Lojas diferentes,<br/>nomes diferentes<br/>12.897.193 candidatos"]
+  K2 --> D
+  K3 --> D
+  K4 --> D
+  R["Recusas registradas em 2019<br/>157.398 pares"] --> T
+  D --> CH{"Checagens<br/>1. palavra em comum<br/>2. atributos, DedupKit<br/>3. números de modelo"}
+  CH --> T["12 tipos de par<br/>rótulo 1 ou 0<br/>até 200.000 cada"]
+  T --> P[("pairs.parquet<br/>2.062.205<br/>split pela chave: 80/10/10")]
+  T -.->|"60 por tipo,<br/>primeiro build"| G["780 pares<br/>rotulados um a um"]
+  G -.->|"erros achados"| DK["DedupKit 0.2.0"]
+  DK -.->|"rebuild"| CH
+```
+
+Cada etapa, com contagens: [metodologia](docs/methodology.md) (em inglês).
+
 ## Os 780 pares rotulados um a um
 
 [`gold/gold_pairs.csv`](gold/gold_pairs.csv): 60 pares de cada fonte de candidatos e resultado de regra de uma primeira

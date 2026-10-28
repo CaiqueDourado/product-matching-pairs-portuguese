@@ -56,6 +56,29 @@ The labels in `pairs.parquet` are **silver**: they come from rules. The last col
 the pairs labelled one by one. Use the types with high agreement for training as they are, weigh the others, and
 **score models on the gold pairs**.
 
+## How it was built
+
+```mermaid
+flowchart LR
+  C[("Catalog<br/>114.6M offers")] --> K1["Same barcode<br/>5,986,116"]
+  C --> K2["Same 2019 group<br/>14,584,554"]
+  C --> K3["Same image signature<br/>9,549,208"]
+  C --> K4["Same name without<br/>numbers and units<br/>8,396,126"]
+  K1 --> D["Different stores,<br/>different names<br/>12,897,193 candidates"]
+  K2 --> D
+  K3 --> D
+  K4 --> D
+  R["2019 refusals log<br/>157,398 pairs"] --> T
+  D --> CH{"Checks<br/>1. shared word<br/>2. attributes, DedupKit<br/>3. model numbers"}
+  CH --> T["12 pair types<br/>label 1 or 0<br/>up to 200,000 each"]
+  T --> P[("pairs.parquet<br/>2,062,205<br/>split by key: 80/10/10")]
+  T -.->|"60 per type,<br/>first build"| G["780 pairs<br/>labelled one by one"]
+  G -.->|"errors found"| DK["DedupKit 0.2.0"]
+  DK -.->|"rebuild"| CH
+```
+
+Each step, with counts: [methodology](docs/methodology.md).
+
 ## The 780 pairs labelled one by one
 
 [`gold/gold_pairs.csv`](gold/gold_pairs.csv): 60 pairs from each candidate source and rule outcome of a first build (test
