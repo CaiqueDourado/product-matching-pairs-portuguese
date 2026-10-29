@@ -1,4 +1,4 @@
-# Product matching pairs (pt-BR)
+# Product Matching Pairs in Portuguese
 
 [![validate](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml/badge.svg)](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/actions/workflows/validate.yml)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA.md)
@@ -111,6 +111,12 @@ group never appears in two splits.
 
 Every column is described in the [data dictionary](docs/data-dictionary.md) ([português](docs/data-dictionary.pt-BR.md)).
 How the pairs were built, step by step: [methodology](docs/methodology.md).
+
+## How a pair is structured
+
+![One labelled pair in JSON](docs/img/pair-json.png)
+
+One pair from `sample/` as nested JSON: pair 1426369, two Samsung Galaxy S10 cases from different stores with the same image signature and the same 2019 group, labelled 0 because the screen sizes differ (6.4 vs 6.1 inches). `same` lists which keys of the two offers are equal, and `gold` is the label it got when checked one by one. Full record: [docs/example-pair.json](docs/example-pair.json), built by [scripts/make_json.py](scripts/make_json.py).
 
 ## Limits
 

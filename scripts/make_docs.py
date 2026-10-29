@@ -106,7 +106,7 @@ def main() -> None:
     }
     fields = lambda cols: [{"name": k, "description": d, "type": t} for k, (t, d) in cols.items()]  # noqa: E731
     meta = {
-        "title": "Pares de Produtos para Matching (pt-BR)",
+        "title": "Product Matching Pairs in Portuguese",
         "subtitle": f"{total / 1e6:.1f}M labelled pairs of Brazilian product offers, hard negatives, 780 checked",
         "description": (ROOT / "docs" / "kaggle-description.md").read_text(encoding="utf-8"),
         "id": "caiquedourado/pares-matching-produtos-ptbr",

@@ -1,0 +1,42 @@
+{
+  "pair_id": 1426369,
+  "split": "test",
+  "pair_type": "same_image_attribute_conflict",
+  "label": 0,
+  "reason": "screen_in: 6.4 vs 6.1",
+  "key": "6518125420317272237882401765712618411817418319716621115415152331591301045118724014514061",
+  "cluster": "i:6518125420317272237882401765712618411817418319716621115415152331591301045118724014514061",
+  "offer_a": {
+    "offer": 59064320,
+    "name": "Capa Samsung Galaxy S10 Plus Tela de 6.4 Polegadas Silicone Cover Anti Impacto Verde",
+    "brand": "Samsung",
+    "store": 1,
+    "price": 97.28,
+    "image_hash": "6518125420317272237882401765712618411817418319716621115415152331591301045118724014514061",
+    "group": 6883590,
+    "group_rule": "productImage_hash_Imagio_ComputeHash"
+  },
+  "offer_b": {
+    "offer": 66625359,
+    "name": "Capa Samsung Galaxy S10 Tela de 6.1 Polegadas Silicone Cover Anti Impacto Verde Água",
+    "brand": "Samsung",
+    "store": 2,
+    "price": 99.5,
+    "image_hash": "6518125420317272237882401765712618411817418319716621115415152331591301045118724014514061",
+    "group": 6883590,
+    "group_rule": "productName_ngram"
+  },
+  "same": {
+    "image_hash": true,
+    "group": true,
+    "brand": true,
+    "store": false
+  },
+  "name_similarity": 0.75,
+  "gold": {
+    "gold_id": 544,
+    "source": "same_image",
+    "silver_label": 0,
+    "label": 0
+  }
+}

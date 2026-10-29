@@ -123,6 +123,12 @@ o mesmo código de barras ou grupo nunca aparece em duas divisões.
 Cada coluna está no [dicionário de dados](docs/data-dictionary.pt-BR.md) ([English](docs/data-dictionary.md)).
 Como os pares foram montados, passo a passo: [metodologia](docs/methodology.md) (em inglês).
 
+## Como um par é estruturado
+
+![Um par rotulado em JSON](docs/img/pair-json.png)
+
+Um par de `sample/` em JSON aninhado: o par 1426369, duas capas de Samsung Galaxy S10 de lojas diferentes com a mesma assinatura de imagem e o mesmo grupo de 2019, rotulado 0 porque o tamanho da tela é diferente (6,4 × 6,1 polegadas). `same` mostra quais chaves das duas ofertas são iguais, e `gold` traz o rótulo que o par recebeu na conferência um a um. Registro completo: [docs/example-pair.json](docs/example-pair.json), gerado por [scripts/make_json.py](scripts/make_json.py).
+
 ## Limites
 
 - Os rótulos aproximados vêm de regras sobre os nomes. Um par rotulado 1 ainda pode ser de dois produtos cujos nomes omitem o que muda.

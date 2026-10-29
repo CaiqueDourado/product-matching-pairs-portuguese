@@ -27,6 +27,12 @@ Code, documentation and a sample: https://github.com/CaiqueDourado/product-match
 - `gold_pairs.csv`: the 780 pairs checked one by one (label 1, 0 or empty when the names do not say enough).
 - `build_stats.json`: counts and build parameters.
 
+## How a pair is structured
+
+![One labelled pair in JSON](https://raw.githubusercontent.com/CaiqueDourado/product-matching-pairs-portuguese/main/docs/img/pair-json.png)
+
+One pair from the GitHub sample as nested JSON: pair 1426369, two Samsung Galaxy S10 cases from different stores with the same image signature and the same 2019 group, labelled 0 because the screen sizes differ (6.4 vs 6.1 inches). `same` lists which keys of the two offers are equal, and `gold` is the label it got when checked one by one. Full record: [docs/example-pair.json](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/blob/main/docs/example-pair.json), built by [scripts/make_json.py](https://github.com/CaiqueDourado/product-matching-pairs-portuguese/blob/main/scripts/make_json.py).
+
 ## Quick start
 
 ```python
