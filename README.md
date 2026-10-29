@@ -141,7 +141,7 @@ One pair from `sample/` as nested JSON: pair 1426369, two Samsung Galaxy S10 cas
 
 ## Related
 
-- Article: [Metaphone, Soundex, n-grams and MinHash on Brazilian product names](https://github.com/CaiqueDourado/articles/blob/main/text-similarity/README.md): the matching keys measured on these pairs.
+- Article: [Metaphone, Soundex, n-grams and MinHash on Brazilian product names](https://medium.com/@caiquedourado/metaphone-soundex-n-grams-and-minhash-on-brazilian-product-names-d6f67745ee4d) (Medium): the matching keys measured on these pairs.
 - [brazilian-ecommerce-products](https://github.com/CaiqueDourado/brazilian-ecommerce-products): the catalog these offers come from ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
 - [DedupKit](https://github.com/CaiqueDourado/DedupKit): the matching rules used to type the pairs, in Python and .NET. Its 0.2.0 attribute check was written from the errors found while labelling these pairs.
 - [SimilarImageFinder](https://github.com/CaiqueDourado/SimilarImageFinder): perceptual image hashes, for matching by photo.

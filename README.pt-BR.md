@@ -141,7 +141,7 @@ Um par de `sample/` em JSON aninhado: o par 1426369, duas capas de Samsung Galax
 
 ## Relacionados
 
-- Artigo: [Metaphone, Soundex, n-gramas e MinHash em nomes de produtos brasileiros](https://github.com/CaiqueDourado/articles/blob/main/text-similarity/README.pt-BR.md): as chaves de agrupamento medidas nestes pares.
+- Artigo: [Metaphone, Soundex, n-gramas e MinHash em nomes de produtos brasileiros](https://github.com/CaiqueDourado/articles/blob/main/text-similarity/README.pt-BR.md) ([em inglês no Medium](https://medium.com/@caiquedourado/metaphone-soundex-n-grams-and-minhash-on-brazilian-product-names-d6f67745ee4d)): as chaves de agrupamento medidas nestes pares.
 - [brazilian-ecommerce-products](https://github.com/CaiqueDourado/brazilian-ecommerce-products): o catálogo de onde vêm as ofertas ([Kaggle](https://www.kaggle.com/datasets/caiquedourado/catalogo-produtos-ecommerce-brasil)).
 - [DedupKit](https://github.com/CaiqueDourado/DedupKit): as regras de matching usadas para tipar os pares, em Python e .NET. A conferência de atributos da versão 0.2.0 foi escrita a partir dos erros encontrados ao rotular estes pares.
 - [SimilarImageFinder](https://github.com/CaiqueDourado/SimilarImageFinder): hashes perceptuais de imagem, para casar pela foto.
